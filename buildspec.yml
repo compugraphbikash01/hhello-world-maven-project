@@ -1,0 +1,27 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo Installing dependencies...
+      - yum install -y gcc-c++
+
+  pre_build:
+    commands:
+      - echo Starting pre-build...
+
+  build:
+    commands:
+      - echo Compiling the Hello World application...
+      - g++ -o hello_world main.cpp hello.cpp
+      - echo Compilation finished with status $?
+
+  post_build:
+    commands:
+      - echo Build completed successfully.
+      - if [ -f ./hello_world ]; then ./hello_world; else echo "Executable not found."; fi
+
+artifacts:
+  files:
+    - hello_world
+  discard-paths: yes
